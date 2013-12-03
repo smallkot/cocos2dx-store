@@ -18,8 +18,6 @@
 #import "EquippableVG.h"
 #import "UpgradeVG.h"
 #import "CCSoomlaNdkBridgeIos.h"
-//-------
-#import "L12n.h"
 
 static StoreAssetsBridge *storeAssets = nil;
 
@@ -278,13 +276,6 @@ static EventDispatcherBridge *eventDispatcherBridge = [EventDispatcherBridge sha
         BOOL success = [(NSNumber*)[notification.userInfo objectForKey:DICT_ELEMENT_SUCCESS] boolValue];
         [parameters setObject:@"CCEventHandler::onRestoreTransactions" forKey:@"method"];
         [parameters setObject: [NSNumber numberWithBool: success] forKey:@"success"];
-        //--------------
-        //NSString* title = [NSString stringWithFormat:@"%s", V_SHARED(L12n)->getString("title_not_connect_game_center").c_str()];
-        NSString* message = [NSString stringWithFormat:@"%s", V_SHARED(L12n)->getString("alert_successfully_restored").c_str()];
-        
-        UIAlertView* alert= [[[UIAlertView alloc] initWithTitle:nil message: message
-                                                       delegate: NULL cancelButtonTitle: @"OK" otherButtonTitles: NULL] autorelease];
-        [alert show];
     }
     else if ([notification.name isEqualToString:EVENT_TRANSACTION_RESTORE_STARTED]) {
         [parameters setObject:@"CCEventHandler::onRestoreTransactionsStarted" forKey:@"method"];
